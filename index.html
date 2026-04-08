@@ -4,15 +4,42 @@
     <link rel="stylesheet" href="./style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Remote tech job board</title>
+    <title>Remote Tech Job Board</title>
 </head>
 <body>
-    <header>
-        <h1>Remote Tech Jobs</h1>
+    <header class="header">
+        <div class="header-container">
+            <h1>Remote Tech Jobs</h1>
+            <button id="theme-toggle" class="btn-theme" title="Toggle Dark Mode">🌙</button>
+        </div>
     </header>
-    <main>
+    <main class="main-content">
+        <div id="controls" class="controls">
+            <div class="control-group">
+                <label for="search">Search JObs</label>
+                <input type="text" id="search" placeholder="e.g. software dev...">
+            </div>
+            <div class="control-group">
+                <label for="categoryfilter">Category</label>
+                <select id="categoryfilter">
+                    <option value="all">All Categories</option>
+                    <option value="Software Development">Software Development</option>
+                    <option value="Customer Service">Customer Service</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="sort-filter">Date Posted</label>
+                <select id="sort-filter">
+                    <option value="newest">Sort: Newest First</option>
+                    <option value="oldest">Sort: Oldest First</option>
+                </select>
+            </div>
+        </div>
         <div id="loader" class="loader">
-        <p>Fetching the latest jobs</p>
+            <p>Fetching the latest jobs...</p>
+        </div>
+        <div id="nonedisplay" class="hidden zero-results">
+            <p>No jobs found matching your criteria. Try adjusting your filters!</p>
         </div>
         <div id="job-container" class="job-grid">
         </div>
