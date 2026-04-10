@@ -1,23 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="./style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Remote Tech Job Board</title>
+    <meta name="description" content="Browse hundreds of remote tech jobs from top companies. Search, filter, save favorites, and find your next role — all in one place.">
+    <meta name="theme-color" content="#3182ce">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="RemoteJobs">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Remote Tech Job Board — Find Your Next Remote Role</title>
 </head>
 <body>
     <header class="header">
         <div class="header-container">
-            <h1>Remote Tech Jobs</h1>
-            <button id="theme-toggle" class="btn-theme" title="Toggle Dark Mode">🌙</button>
+            <div class="header-brand">
+                <span class="header-icon">💼</span>
+                <h1>Remote Tech Jobs</h1>
+            </div>
+            <div class="header-actions">
+                <button id="favorites-toggle" class="btn-favorites" title="Show Favorites">
+                    <span class="fav-icon">❤️</span>
+                    <span class="fav-label">Favorites</span>
+                    <span id="fav-count" class="fav-count hidden">0</span>
+                </button>
+                <button id="theme-toggle" class="btn-theme" title="Toggle Dark Mode">🌙</button>
+            </div>
         </div>
     </header>
     <main class="main-content">
         <div id="controls" class="controls">
             <div class="control-group">
-                <label for="search">Search JObs</label>
-                <input type="text" id="search" placeholder="e.g. software dev...">
+                <label for="search">Search Jobs</label>
+                <div class="search-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="search" placeholder="e.g. React developer, Google...">
+                </div>
             </div>
             <div class="control-group">
                 <label for="categoryfilter">Category</label>
@@ -25,25 +49,50 @@
                     <option value="all">All Categories</option>
                     <option value="Software Development">Software Development</option>
                     <option value="Customer Service">Customer Service</option>
+                    <option value="Design">Design</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Sales">Sales</option>
                 </select>
             </div>
             <div class="control-group">
                 <label for="sort-filter">Date Posted</label>
                 <select id="sort-filter">
-                    <option value="newest">Sort: Newest First</option>
-                    <option value="oldest">Sort: Oldest First</option>
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
                 </select>
             </div>
         </div>
+
+        <div id="results-info" class="results-info hidden">
+            <span id="results-count"></span>
+        </div>
+
         <div id="loader" class="loader">
-            <p>Fetching the latest jobs...</p>
+            <div class="spinner"></div>
+            <p>Fetching the latest remote jobs…</p>
         </div>
+
         <div id="nonedisplay" class="hidden zero-results">
-            <p>No jobs found matching your criteria. Try adjusting your filters!</p>
+            <div class="zero-icon">🔎</div>
+            <p>No jobs found matching your criteria.</p>
+            <p class="zero-hint">Try adjusting your search or filters!</p>
         </div>
-        <div id="job-container" class="job-grid">
+
+        <div id="job-container" class="job-grid"></div>
+
+        <div id="load-more-container" class="load-more-container hidden">
+            <div id="scroll-loader" class="scroll-loader hidden">
+                <div class="dot-pulse"></div>
+                <span>Loading more jobs…</span>
+            </div>
+            <button id="load-more-btn" class="btn-load-more hidden">Load More Jobs</button>
         </div>
     </main>
+    <!-- <footer>
+        made by AYUSH SHARMA ~ NST ADYPU
+    </footer> -->
+    <button id="back-to-top" class="btn-back-top hidden" title="Back to top">↑</button>
+
     <script src="script.js"></script>
 </body>
 </html>
